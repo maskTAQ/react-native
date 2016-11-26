@@ -24,17 +24,19 @@ let {
 
 import SlideMenu from './component/slidemenu/slidemenu.js';
 import Main from './component/main/main.js';
-class test extends Component {
-
+class s extends Component {
+  openDrawer=()=>{
+   this.refs.drawer.openDrawer();
+  };
   render() {
     return (<DrawerLayoutAndroid
-    ref={'box'}
+      ref={'drawer'}
       drawerWidth={width*0.8}
       drawerPosition={DrawerLayoutAndroid.positions.Left}
       renderNavigationView={()=><SlideMenu></SlideMenu>}
       >
      
-      <Main></Main>
+      <Main drawer={this.openDrawer}></Main>
 
       </DrawerLayoutAndroid>)
   }
@@ -43,4 +45,4 @@ class test extends Component {
   }
 }
 
-AppRegistry.registerComponent('test', () => test);
+AppRegistry.registerComponent('s', () => s);
