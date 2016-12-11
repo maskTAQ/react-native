@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, {
+ import React, {
   Component
 } from 'react';
 import {
@@ -14,7 +14,12 @@ import {
   Dimensions,
   Text,
   View,
-  StatusBar
+  StatusBar,
+  Navigator,
+  ToastAndroid,
+  BackAndroid,
+  NativeModules,
+ 
 } from 'react-native';
 
 let {
@@ -22,27 +27,56 @@ let {
   width
 } = Dimensions.get('window');
 
-import SlideMenu from './component/slidemenu/slidemenu.js';
-import Main from './component/main/main.js';
+let Orientation =NativeModules.Orientation;
+import index from './component/drawer/drawer.js'
 class s extends Component {
-  openDrawer=()=>{
-   this.refs.drawer.openDrawer();
-  };
+
+  onBackAndroid = () => {
+
+               if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {//最近2秒内按过back键，可以退出应用。
+
+                 
+
+                return false;
+
+            }
+
+    this.lastBackPressed = Date.now();
+
+    ToastAndroid.show('双击退出应用', ToastAndroid.SHORT);
+
+    return true;
+
+  }
+  componentWillMount(){
+
+    Orientation.lockToPortrait();
+             BackAndroid.addEventListener('hardwareBackPress', this.onBackAndroid);
+
+  }
+
+  componentWillUnmount() {
+
+             BackAndroid.removeEventListener('hardwareBackPress', this.onBackAndroid);
+
+  }
+
+
   render() {
-    return (<DrawerLayoutAndroid
-      ref={'drawer'}
-      drawerWidth={width*0.8}
-      drawerPosition={DrawerLayoutAndroid.positions.Left}
-      renderNavigationView={()=><SlideMenu></SlideMenu>}
-      >
-     
-      <Main drawer={this.openDrawer}></Main>
+    return (
+      <Navigator 
+      style={{flex:1}}
+      initialRoute={{name:'drawer',component: index}}
+      configureScene={(route) => {
+        return Navigator.SceneConfigs.PushFromRight;
+      }}
+      renderScene={(route, navigator) =>{
+        let Component = route.component;
+        return (<route.component topNavigator={navigator} width={width} height={height}/>)
+      }}
+      />)
+      }
 
-      </DrawerLayoutAndroid>)
-  }
-  componentDidMount() {
+    }
 
-  }
-}
-
-AppRegistry.registerComponent('s', () => s);
+    AppRegistry.registerComponent('s', () => s);

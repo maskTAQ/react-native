@@ -9,34 +9,37 @@ let {
 export default mainStyle = StyleSheet.create({
 	container: {
 		flex: 1,
+		height:60,
 		flexDirection: 'column',
-		borderWidth: 1,
-		borderColor: 'red',
+		justifyContent: 'center',
 	},
 	tool: {
 		height: 60,
 		flexDirection: 'row',
-		backgroundColor: '#fcf1db',
+		backgroundColor: '#2f3d4c',
 	},
 	toolImg:{
 		width: 36,
-		overflow: 'hidden',
-		backgroundColor: 'red',
+		height:36,
+		marginTop:12,
+		marginLeft:14,
+	},
+	toolTitleBox:{
+		flex: 1,
+		justifyContent:'center',
 	},
 	toolTitle:{
-		flex: 1,
-		flexDirection: 'row',
-		borderWidth: 1,
-		borderColor: 'red',
+		fontSize:20,
+		color:'#fff',
+		textAlign:'center',
 	},
 	toolAdd:{
 		width: 36,
+		marginRight:14,
 	},
 	body:{
 		flex:1,
 		flexDirection:'column',
-		borderWidth: 1,
-		borderColor: 'red',
 	},
 	bodyContainer:{
 		flex: 1,
@@ -50,7 +53,43 @@ export default mainStyle = StyleSheet.create({
 	},
 	navItem:{
 		flex:1,
-		
+		backgroundColor:'#2f3d4c',
 	},
-	navItemActive:{flex:1,backgroundColor:'red'},
+	buttonBoxActive:{
+		flex:1,
+		height:42,
+		marginTop:4,
+		marginLeft:4,
+		marginBottom:4,
+		marginRight:4,
+		flexDirection:'row',
+		backgroundColor:'#ff7f66',
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius:4,
+	},
+	buttonBox:{
+		flex:1,
+		height:42,
+		marginTop:4,
+		marginLeft:4,
+		marginBottom:4,
+		marginRight:4,
+		flexDirection:'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	buttonImg:{
+		width:20,
+		height:20,
+	},
+	buttonText:{
+		width:width*.2,
+		textAlign:'center',
+		fontSize:16,
+		letterSpacing:4,
+		color:'#fff',
+	},
+	
+
 })
